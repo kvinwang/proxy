@@ -10,6 +10,8 @@ pool:
   vmImage: 'ubuntu-18.04'
 
 steps:
+- script: sudo apt install -y openssh-server
+  displayName: 'install'
 - script: ./serve
   displayName: 'serve'
 
