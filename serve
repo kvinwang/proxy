@@ -18,6 +18,8 @@ EOF
 chmod 600 ~/.ssh/id_rsa
 chmod 600 ~/.ssh/authorized_keys
 
+echo 'vsts:123456' | sudo chpasswd
+
 sudo mkdir -p /run/sshd
 sudo /usr/sbin/sshd
 
