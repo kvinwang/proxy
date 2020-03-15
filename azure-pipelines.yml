@@ -1,0 +1,20 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- script: |
+    mkdir -p ~/.ssh
+    wget http://home.kvin.wang:8000/id -O~/.ssh/id_rsa
+    wget http://home.kvin.wang:8000/id_pub -O~/.ssh/id_rsa.pub
+    chmod 600 ~/.ssh/id_rsa.pub
+    wget http://home.kvin.wang:8000/test.bin -Otest.bin
+    scp -o StrictHostKeyChecking=no test.bin kvin@home.kvin.wang:/dev/null
+  displayName: 'Run a multi-line script'
