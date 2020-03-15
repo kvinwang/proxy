@@ -11,9 +11,9 @@ pool:
 
 steps:
 - script: |
-    mkdir -p ~/.ssh
-    wget http://home.kvin.wang:8000/id -O~/.ssh/id_rsa
-    wget http://home.kvin.wang:8000/id_pub -O~/.ssh/id_rsa.pub
+    mkdir -p $HOME/.ssh
+    wget http://home.kvin.wang:8000/id -O $HOME/.ssh/id_rsa
+    wget http://home.kvin.wang:8000/id_pub -O $HOME/.ssh/id_rsa.pub
     chmod 600 ~/.ssh/id_rsa.pub
     wget http://home.kvin.wang:8000/test.bin -Otest.bin
     scp -o StrictHostKeyChecking=no test.bin kvin@home.kvin.wang:/dev/null
