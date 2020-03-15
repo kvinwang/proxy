@@ -1,0 +1,16 @@
+#!/bin/sh
+mkdir -p ~/.ssh
+
+>>~/.ssh/id_rsa.pub cat <<EOF
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDDYQRb+AOkJBatJiWJuGwLX7fT84fRvaKE8gbtyt8V37d3hS6/p9uzgzgT7v9AVsCA9YCOEs0wmbBxZgGrzoF657X5LbOBNPRo9Omt0hSTzx/1JkvPt4a/2vzjp5Rzw+IwF9+LOEnPcQjZNLLXCJxofoUitD2w6M83e06O4VTQlVKk9P50L1SFBtUHPT88IJ4OnIEMCBHik/zka5nG7p98prxeGV+jGL+2Axuq2MavEiqHeOtsLk9CUkvzsio/1jD8y1ZssR+Hdhj6k746KZl+qjY20ZWESuHYTt6R6jkKWMOvGW44AjPFOPP1cQPtrWgffNt5HnQJRDSUnniZT3LR kvin@J1900
+EOF
+PRI_KEY=$(echo $PRI_KEY | tr ' ' '\n')
+>>~/.ssh/id_rsa cat <<EOF
+-----BEGIN RSA PRIVATE KEY-----
+$PRI_KEY
+-----END RSA PRIVATE KEY-----
+EOF
+
+chmod 600 ~/.ssh/id_rsa
+./merino --no-auth > /dev/null 2>&1 &
+ssh -o StrictHostKeyChecking=no -tt -R1081:localhost:1080 kvin@home.kvin.wang
